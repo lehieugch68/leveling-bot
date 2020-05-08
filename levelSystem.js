@@ -6,7 +6,7 @@ class Talker {
 }
 
 class LevelSystem {
-	constructor(client, db, options = {cooldown: 60, xpmin: 10, xpmax: 20, lvlupXp = 500}) {
+	constructor(client, db, options = {cooldown: 60, xpmin: 10, xpmax: 20, lvlupXp: 500}) {
 		this.client = client;
 		this.db = db;
 		this.talkedRecently = [];
