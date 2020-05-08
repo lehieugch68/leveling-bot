@@ -20,7 +20,7 @@ class LevelSystem {
 				let talkerGuild = new Talker(msg.guild.id);
 				this.talkedRecently.push(talkerGuild);
 			}
-			let talker = this.talkedRecently.find(g => g.guildID === msg.guild.id).talkedID;
+			let talker = this.talkedRecently.find(g => g.guildID === msg.guild.id).talkerID;
 			if (talker.every(id => id !== msg.author.id)) {
 				this.talkedRecently.find(g => g.guildID === msg.guild.id).talkerID.push(msg.author.id);
 				var xp = randomXP(this.xpmin, this.xpmax);
