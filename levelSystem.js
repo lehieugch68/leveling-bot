@@ -6,11 +6,11 @@ class Talker {
 }
 
 class LevelSystem {
-	constructor(client, db, options = {timeOut: 60, xpmin: 10, xpmax: 20, lvlupXp = 500}) {
+	constructor(client, db, options = {cooldown: 60, xpmin: 10, xpmax: 20, lvlupXp = 500}) {
 		this.client = client;
 		this.db = db;
 		this.talkedRecently = [];
-		this.timeOut = options.timeOut;
+		this.cooldown = options.cooldown;
 		this.xpmin = options.xpmin;
 		this.xpmax = options.xpmax;
 		this.lvlupXp = options.lvlupXp;
@@ -40,7 +40,7 @@ class LevelSystem {
 				}
 				setTimeout(() => {
 					this.talkedRecently.find(g => g.guildID === msg.guild.id).talkerID = this.talkedRecently.find(g => g.guildID === msg.guild.id).talkerID.filter(id => id !== msg.author.id);
-				}, 1000*this.timeOut)
+				}, 1000*this.cooldown)
 			}
 		});
 	}
