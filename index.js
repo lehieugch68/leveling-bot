@@ -21,7 +21,7 @@ const options = {
 }
 
 const LevelSystem = require('./levelSystem.js');
-const levelSystem = new LevelSystem(client, db);
+const levelSystem = new LevelSystem(client, db, options);
 
 client.once('ready', () => {
 	console.log('Ready!');
