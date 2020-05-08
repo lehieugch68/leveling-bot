@@ -15,7 +15,6 @@ module.exports = {
 					let member = msg.guild.members.cache.find(m => m.id === e.id);
 					return `${i+1}. ${(!member) ? 'Thành viên đã rời máy chủ' : `${member.user.username}#${member.user.discriminator}`}`}).join("\n\n"))
 				.setTimestamp()
-				.setTimestamp()
 			return msg.channel.send(embed);
 		});
 	},
