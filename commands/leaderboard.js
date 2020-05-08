@@ -11,7 +11,7 @@ module.exports = {
 				.setColor('0x333333')
 				.setTitle(msg.guild.name)
 				.setThumbnail(msg.guild.iconURL({ format: 'png', dynamic: true, size: 1024 }))
-        .setDescription(rows.map((e, i) => {
+        			.setDescription(rows.map((e, i) => {
 					let member = msg.guild.members.cache.find(m => m.id === e.id);
 					return `${i+1}. ${(!member) ? 'Thành viên đã rời máy chủ' : `${member.user.username}#${member.user.discriminator}`}`}).join("\n\n"))
 				.setTimestamp()
