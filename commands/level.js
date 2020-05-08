@@ -4,7 +4,7 @@ module.exports = {
 	name: 'level',
 	description: 'Xem cấp độ bản thân hoặc tag ai đó.',
 	execute(msg, args, client, db) {
-    let user = msg.mentions.users.first()||msg.author;
+    		let user = msg.mentions.users.first()||msg.author;
 		let query = `SELECT * FROM '${msg.guild.id}' WHERE id = '${user.id}'`;
 		db.get(query, (err, row) => {
 			if (err||!row) return msg.reply('Xảy ra lỗi với cơ sở dữ liệu!');
