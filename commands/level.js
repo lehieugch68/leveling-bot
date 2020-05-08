@@ -12,8 +12,8 @@ module.exports = {
 				.setColor('0x333333')
 				.setTitle(user.username)
 				.setThumbnail(user.avatarURL())
-        .addField("**Cấp độ:**", row.level, true)
-        .addField("**Điểm:**", row.point, true)
+        			.addField("**Cấp độ:**", row.level, true)
+        			.addField("**Điểm:**", row.point, true)
 				.setTimestamp()
 			return msg.channel.send(embed);
 		});
