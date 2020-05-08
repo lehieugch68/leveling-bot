@@ -24,14 +24,14 @@ class LevelSystem {
 			if (talker.every(id => id !== msg.author.id)) {
 				this.talkedRecently.find(g => g.guildID === msg.guild.id).talkerID.push(msg.author.id);
 				var xp = randomXP(this.xpmin, this.xpmax);
-				var point = xp, level = 1;
+				var point = xp, level = 0;
 				try {
 					await this.db.run(`CREATE TABLE IF NOT EXISTS '${msg.guild.id}' (id VARCHAR(30) PRIMARY KEY, point INTEGER NULL, level INTEGER NULL)`);
 					this.db.get(`SELECT * FROM '${msg.guild.id}' WHERE id = '${msg.author.id}'`, (err, row) => {
 						if (err) return console.log(err);
 						if (row) {
 							point += row.point;
-							level = (point >= this.lvlupXp) ? Math.floor(point/this.lvlupXp) : 1;
+							level = (point >= this.lvlupXp) ? Math.floor(point/this.lvlupXp) : 0;
 						}
 						this.db.run(`INSERT INTO '${msg.guild.id}' (id, point, level) VALUES ('${msg.author.id}', ${point}, ${level}) ON CONFLICT(id) DO UPDATE SET point = ${point}, level = ${level}`);
 					});
