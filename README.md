@@ -16,3 +16,9 @@ const options = {
   lvlupXp: 500
 }
 ```
+
+Các lệnh:
+```
+_level - Xem cấp độ và điểm bản thân hoặc tag ai đó.
+_leaderboard - Xem top 10 xếp hạng của máy chủ.
+```
