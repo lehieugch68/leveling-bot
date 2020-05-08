@@ -6,7 +6,7 @@ var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('./Discord.db'); //tệp SQLite
 
 const options = {
-  timeOut: 60,
+  cooldown: 60,
   xpmin: 10,
   xpmax: 20,
   lvlupXP: 500
