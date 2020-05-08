@@ -17,7 +17,7 @@ const options = {
   cooldown: 60,
   xpmin: 10,
   xpmax: 20,
-  lvlupXP: 500
+  lvlupXp: 500
 }
 
 const LevelSystem = require('./levelSystem.js');
