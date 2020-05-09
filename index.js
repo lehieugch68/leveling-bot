@@ -25,7 +25,7 @@ const levelSystem = new LevelSystem(client, db, options);
 
 client.once('ready', () => {
 	console.log('Ready!');
-});
+})
 
 client.on('message', async msg => {
   if (msg.author.bot) return;
@@ -41,6 +41,6 @@ client.on('message', async msg => {
 		return msg.reply(`Xảy ra lỗi khi thực hiện lệnh này:\n\`${error.message}\``);
 	}
    }
-}
+})
 
 client.login(TOKEN)
