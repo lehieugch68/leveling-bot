@@ -10,10 +10,10 @@ class LevelSystem {
 		this.client = client;
 		this.db = db;
 		this.talkedRecently = [];
-		this.cooldown = options.cooldown;
-		this.xpmin = options.xpmin;
-		this.xpmax = options.xpmax;
-		this.lvlupXp = options.lvlupXp;
+		this.cooldown = options.cooldown||60;
+		this.xpmin = options.xpmin||10;
+		this.xpmax = options.xpmax||20;
+		this.lvlupXp = options.lvlupXp||500;
 		client.on('message', async msg => {
 			if (msg.author.bot) return undefined;
 			if (!this.talkedRecently.find(g => g.guildID === msg.guild.id)) {
