@@ -1,3 +1,5 @@
+const sqliteRunAsync = require('./sqliteRunAsync.js')
+
 class Talker {
 	constructor(guildID) {
 		this.talkerID = [];
@@ -26,7 +28,7 @@ class LevelSystem {
 				var xp = randomXP(this.xpmin, this.xpmax);
 				var point = xp, level = 0;
 				try {
-					await this.db.run(`CREATE TABLE IF NOT EXISTS '${msg.guild.id}' (id VARCHAR(30) PRIMARY KEY, point INTEGER NULL, level INTEGER NULL)`);
+					await sqliteRunAsync(this.db, `CREATE TABLE IF NOT EXISTS '${msg.guild.id}' (id VARCHAR(30) PRIMARY KEY, point INTEGER NULL, level INTEGER NULL)`);
 					this.db.get(`SELECT * FROM '${msg.guild.id}' WHERE id = '${msg.author.id}'`, (err, row) => {
 						if (err) return console.log(err);
 						if (row) {
