@@ -22,26 +22,28 @@ const options = {
 }
 
 const LevelSystem = require('./levelSystem.js');
-const levelSystem = new LevelSystem(client, db, options);
+client.levelSystem = new LevelSystem(db, options);
 
 client.once('ready', () => {
 	console.log('Ready!');
 })
 
 client.on('message', async msg => {
-  if (msg.author.bot) return;
+	if (msg.author.bot) return;
   
-  if (msg.content.toLowerCase().startsWith(PREFIX)) {
-	const args = msg.content.slice(PREFIX.length).split(/ +/);
-	const commandName = args.shift().toLowerCase();
-	const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
-	if (command == null) return;
-	try {
-		command.execute(msg, args, client, db);
-	} catch (error) {
-		return msg.reply(`Xảy ra lỗi khi thực hiện lệnh này:\n\`${error.message}\``);
-	}
-   }
+	client.levelSystem.event.emit('message', msg);
+	
+	if (msg.content.toLowerCase().startsWith(PREFIX)) {
+		const args = msg.content.slice(PREFIX.length).split(/ +/);
+		const commandName = args.shift().toLowerCase();
+		const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+		if (command == null) return;
+		try {
+			command.execute(msg, args, client, db);
+		} catch (error) {
+			return msg.reply(`Xảy ra lỗi khi thực hiện lệnh này:\n\`${error.message}\``);
+		}
+   	}
 })
 
 client.login(TOKEN)
