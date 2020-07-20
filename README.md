@@ -4,7 +4,7 @@ A leveling system for Discord bot (using SQLite database).
 
 Install:
 ```
-npm i leveling-system-discord
+npm i leveling-discord
 ```
 
 Example:
