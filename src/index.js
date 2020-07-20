@@ -27,13 +27,13 @@ class LevelingSystem {
 			let xp = randomXP(this.options.xpmin, this.options.xpmax);
 			let point = xp, level = 0;
 			try {
-				await sqlite3Async.Run(db, `CREATE TABLE IF NOT EXISTS '${msg.guild.id}' (id VARCHAR(30) PRIMARY KEY, point INTEGER NULL, level INTEGER NULL)`);
-				let row = await sqlite3Async.Get(this.db, `SELECT * FROM '${msg.guild.id}' WHERE id = '${msg.author.id}'`);
+				await sqlite3Promise.Run(db, `CREATE TABLE IF NOT EXISTS '${msg.guild.id}' (id VARCHAR(30) PRIMARY KEY, point INTEGER NULL, level INTEGER NULL)`);
+				let row = await sqlite3Promise.Get(this.db, `SELECT * FROM '${msg.guild.id}' WHERE id = '${msg.author.id}'`);
 				if (row != null) {
 					point += row.point;
 					level = (point >= this.options.lvlupXp) ? Math.floor(point/this.options.lvlupXp) : 0;
 				}
-				await sqlite3Async.Run(db, `INSERT INTO '${msg.guild.id}' (id, point, level) VALUES ('${msg.author.id}', ${point}, ${level}) ON CONFLICT(id) DO UPDATE SET point = ${point}, level = ${level}`);
+				await sqlite3Promise.Run(db, `INSERT INTO '${msg.guild.id}' (id, point, level) VALUES ('${msg.author.id}', ${point}, ${level}) ON CONFLICT(id) DO UPDATE SET point = ${point}, level = ${level}`);
 			} catch (err) { 
 				return console.log(err);
 			}
