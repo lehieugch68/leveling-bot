@@ -1,4 +1,4 @@
-# Leveling Bot
+# Leveling System Discord
 
 A leveling system for Discord bot (using SQLite database).
 
