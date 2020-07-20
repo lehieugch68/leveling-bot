@@ -14,7 +14,7 @@ const client = new Discord.Client()
 
 const leveling = require('leveling-system-discord')
 
-const db = './levelingSystem.db'; //path 
+const db = './levelingSystem.db'; //path of the database file (open or create)
 const options = {
   cooldown: 60, //second
   xpmin: 10,
