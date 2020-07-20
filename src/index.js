@@ -24,14 +24,14 @@ class LevelingSystem {
 			}
 			let talker = this.talkedRecently.find(g => g.guildID === msg.guild.id).talkerID;
 			if (talker.some(id => id === msg.author.id)) return;
-			let xp = randomXP(this.xpmin, this.xpmax);
+			let xp = randomXP(this.options.xpmin, this.options.xpmax);
 			let point = xp, level = 0;
 			try {
 				await sqlite3Async.Run(db, `CREATE TABLE IF NOT EXISTS '${msg.guild.id}' (id VARCHAR(30) PRIMARY KEY, point INTEGER NULL, level INTEGER NULL)`);
 				let row = await sqlite3Async.Get(this.db, `SELECT * FROM '${msg.guild.id}' WHERE id = '${msg.author.id}'`);
 				if (row != null) {
 					point += row.point;
-					level = (point >= this.lvlupXp) ? Math.floor(point/this.lvlupXp) : 0;
+					level = (point >= this.options.lvlupXp) ? Math.floor(point/this.options.lvlupXp) : 0;
 				}
 				await sqlite3Async.Run(db, `INSERT INTO '${msg.guild.id}' (id, point, level) VALUES ('${msg.author.id}', ${point}, ${level}) ON CONFLICT(id) DO UPDATE SET point = ${point}, level = ${level}`);
 			} catch (err) { 
@@ -40,7 +40,7 @@ class LevelingSystem {
 			this.talkedRecently.find(g => g.guildID === msg.guild.id).talkerID.push(msg.author.id);
 			setTimeout(() => {
 				this.talkedRecently.find(g => g.guildID === msg.guild.id).talkerID = this.talkedRecently.find(g => g.guildID === msg.guild.id).talkerID.filter(id => id !== msg.author.id);
-			}, 1000*this.cooldown);
+			}, 1000*this.options.cooldown);
 		})
 	}
 }
